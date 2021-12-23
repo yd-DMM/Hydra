@@ -81,4 +81,55 @@ public func zip<A,B,C,D>(in context: Context? = nil, a: Promise<A>, b: Promise<B
 	})
 }
 
+/// Join five promises and return a tuple with the results of the five promises passed (promises will be resolved in parallel in `background` QoS queue).
+/// Rejects as soon one promise reject.
+///
+/// - Parameters:
+///   - context: context queue to report the result (if not specified `background` queue is used instead)
+///   - a: promise a
+///   - b: promsie b
+///   - c: promise c
+///   - d: promise d
+///   - e: promise e
+/// - Returns: joined promise of type Promise<(A,B,C,D,E)>
+public func zip<A,B,C,D,E>(in context: Context? = nil, a: Promise<A>, b: Promise<B>, c: Promise<C>, d: Promise<D>, e: Promise<E>) -> Promise<(A,B,C,D,E)> {
+    return all(a.void,b.void,c.void,d.void,e.void).then(in: context, { _ in
+        return Promise<(A, B, C, D, E)>(resolved: (a.state.value!, b.state.value!, c.state.value!, d.state.value!, e.state.value!))
+    })
+}
 
+/// Join six promises and return a tuple with the results of the six promises passed (promises will be resolved in parallel in `background` QoS queue).
+/// Rejects as soon one promise reject.
+///
+/// - Parameters:
+///   - context: context queue to report the result (if not specified `background` queue is used instead)
+///   - a: promise a
+///   - b: promsie b
+///   - c: promise c
+///   - d: promise d
+///   - e: promise e
+///   - f: promise f
+/// - Returns: joined promise of type Promise<(A,B,C,D,E,F)>
+public func zip<A,B,C,D,E,F>(in context: Context? = nil, a: Promise<A>, b: Promise<B>, c: Promise<C>, d: Promise<D>, e: Promise<E>, f: Promise<F>) -> Promise<(A,B,C,D,E,F)> {
+    return all(a.void,b.void,c.void,d.void,e.void,f.void).then(in: context, { _ in
+        return Promise<(A, B, C, D, E, F)>(resolved: (a.state.value!, b.state.value!, c.state.value!, d.state.value!, e.state.value!, f.state.value!))
+    })
+}
+
+/// Join seven promises and return a tuple with the results of the seven promises passed (promises will be resolved in parallel in `background` QoS queue).
+/// Rejects as soon one promise reject.
+///
+/// - Parameters:
+///   - context: context queue to report the result (if not specified `background` queue is used instead)
+///   - a: promise a
+///   - b: promsie b
+///   - c: promise c
+///   - d: promise d
+///   - e: promise e
+///   - f: promise f
+/// - Returns: joined promise of type Promise<(A,B,C,D,E,F)>
+public func zip<A,B,C,D,E,F,G>(in context: Context? = nil, a: Promise<A>, b: Promise<B>, c: Promise<C>, d: Promise<D>, e: Promise<E>, f: Promise<F>, g: Promise<G>) -> Promise<(A,B,C,D,E,F,G)> {
+    return all(a.void,b.void,c.void,d.void,e.void,f.void,g.void).then(in: context, { _ in
+        return Promise<(A, B, C, D, E, F, G)>(resolved: (a.state.value!, b.state.value!, c.state.value!, d.state.value!, e.state.value!, f.state.value!, g.state.value!))
+    })
+}
